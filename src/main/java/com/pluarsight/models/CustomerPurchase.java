@@ -9,21 +9,39 @@ public class CustomerPurchase {
         this.orderItems = new ArrayList<>();
     }
     public void addItem(IOrderItem item){
+        orderItems.add(item);
 
     }
     public double getTotal(){
-        return 0;
+        double total= 0;
+        for(IOrderItem item: orderItems){
+            total+= item.getPrice();
+        }
+        return total;
+
+
 
     }
     public String getDetails(){
-        return"";
+        String big = "";
+        for(IOrderItem item: orderItems){
+            big+= item.getDetails()+ "\n";
+        }
+
+        return big;
 
     }
     public boolean isValidOrder(){
-        return false;
+        return !orderItems.isEmpty();
 
     }
-    public void getNewestItemsFirst(){
+    public ArrayList<IOrderItem> getNewestItemsFirst(){
+        ArrayList<IOrderItem> newestFirst = new ArrayList<>();
+        for(int i = orderItems.size()-1; i>=0; i--){
+            newestFirst.add(orderItems.get(i));
+        }
+        return newestFirst;
+
 
     }
 }
