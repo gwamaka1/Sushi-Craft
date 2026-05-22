@@ -13,17 +13,17 @@ public abstract class PremiumToppings extends Topping {
     }
 
     @Override
-    public String getName() {
-        return super.getName();
+    String getName() {
+        return " ";
     }
 
     @Override
     public double getPrice(String size) {
-        return super.getPrice(size);
+        return 0;
     }
 
     @Override
     public String getDetails() {
-        return super.getDetails();
+        return " ";
     }
 }

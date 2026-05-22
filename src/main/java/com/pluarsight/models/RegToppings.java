@@ -6,18 +6,18 @@ public class RegToppings extends Topping {
     }
 
     @Override
-    public String getName() {
-        return super.getName();
+    String getName() {
+        return " ";
     }
 
     @Override
-    public String getDetails() {
-        return super.getDetails();
+    String getDetails() {
+        return " ";
     }
 
     @Override
-    public double getPrice(String size) {
-        return super.getPrice(size);
+    double getPrice(String size) {
+        return 0;
     }
 
 
