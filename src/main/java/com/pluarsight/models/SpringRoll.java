@@ -13,12 +13,12 @@ public class SpringRoll implements IOrderItem {
     }
 
     @Override
-    public double getPrice(String size) {
-        return 0;
+    public double getPrice() {
+        return 1.50;
     }
 
     @Override
     public String getDetails() {
-        return "";
+        return type+ " SpringRoll- $"+ getPrice();
     }
 }
