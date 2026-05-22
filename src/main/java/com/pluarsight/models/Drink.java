@@ -20,11 +20,22 @@ public class Drink implements IOrderItem {
 
     @Override
     public String getDetails() {
-        return "";
+
+        return size + " " + flavor + " Drink - $" + getPrice();
     }
 
     @Override
     public double getPrice() {
-        return 0;
+        if (size.equalsIgnoreCase("Small")){
+            return 2.00;
+        }
+        else if(size.equalsIgnoreCase("Medium")){
+            return 2.50;
+        } else if (size.equalsIgnoreCase("Large")) {
+            return 3.00;
+
+        }
+        else return 0;
+
     }
 }
