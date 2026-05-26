@@ -35,7 +35,30 @@ public class Sushi implements IOrderItem{
 
     @Override
     public String getDetails() {
-        return "";
+        String details = "";
+
+        details += size + " Sushi";
+        details += " with " + wrapType + " wrap";
+
+        if (isFried) {
+            details += ", fried";
+        } else {
+            details += ", not fried";
+        }
+
+        if (toppings.isEmpty()) {
+            details += "\nToppings: none";
+        } else {
+            details += "\nToppings:";
+
+            for (Topping topping : toppings) {
+                details += "\n- " + topping.getDetails();
+            }
+        }
+
+        details += "\nPrice: $" + getPrice();
+
+        return details;
     }
 
     @Override
