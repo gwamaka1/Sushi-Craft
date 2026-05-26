@@ -13,11 +13,12 @@ public class Side extends Topping{
 
     @Override
     public double getPrice(String size) {
+
         return 0.0;
     }
 
     @Override
     public String getDetails() {
-        return " ";
+        return "Side: " + name;
     }
 }

@@ -12,7 +12,7 @@ public class RegToppings extends Topping {
 
     @Override
     public String getDetails() {
-        return " ";
+        return "Regular Topping:"+ name;
     }
 
     @Override
