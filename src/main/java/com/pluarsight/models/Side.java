@@ -6,8 +6,9 @@ public class Side extends Topping{
     }
 
     @Override
-    String getName() {
-        return "";
+    public String getName() {
+
+        return name;
     }
 
     @Override

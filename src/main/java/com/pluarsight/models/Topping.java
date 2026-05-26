@@ -1,18 +1,21 @@
 package com.pluarsight.models;
 
-public abstract class Topping  {
-    private String name;
+public abstract class Topping {
+    protected String name;
 
     public Topping(String name) {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public double getPrice(String size){
+        return 0;
+    };
 
-
-
-
-    abstract String getDetails();
-    abstract String getName();
-    abstract double getPrice(String size);
+    public String getDetails(){
+        return " ";
+    };
 }

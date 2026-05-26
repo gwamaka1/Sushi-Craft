@@ -7,7 +7,7 @@ public class Fish extends PremiumToppings{
 
     @Override
     public boolean isExtra() {
-        return super.isExtra();
+        return isExtra;
     }
 
     @Override

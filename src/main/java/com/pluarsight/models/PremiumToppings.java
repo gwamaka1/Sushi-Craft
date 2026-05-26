@@ -1,7 +1,7 @@
 package com.pluarsight.models;
 
 public abstract class PremiumToppings extends Topping {
-    private boolean isExtra;
+    protected boolean isExtra;
 
     public PremiumToppings(String name, boolean isExtra) {
         super(name);
@@ -13,8 +13,8 @@ public abstract class PremiumToppings extends Topping {
     }
 
     @Override
-    String getName() {
-        return " ";
+    public String getName() {
+        return name;
     }
 
     @Override

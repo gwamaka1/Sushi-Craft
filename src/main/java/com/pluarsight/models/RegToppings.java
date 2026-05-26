@@ -6,17 +6,17 @@ public class RegToppings extends Topping {
     }
 
     @Override
-    String getName() {
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getDetails() {
         return " ";
     }
 
     @Override
-    String getDetails() {
-        return " ";
-    }
-
-    @Override
-    double getPrice(String size) {
+    public double getPrice(String size) {
         return 0;
     }
 

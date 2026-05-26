@@ -7,7 +7,7 @@ public class Meats extends PremiumToppings {
 
     @Override
     public boolean isExtra() {
-        return super.isExtra();
+        return isExtra;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class Meats extends PremiumToppings {
 
     @Override
     public double getPrice(String size) {
-        return super.getPrice(size);
+        return 0.0;
     }
 
     @Override

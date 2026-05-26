@@ -6,17 +6,19 @@ public class Condiments extends Topping{
     }
 
     @Override
-    String getName() {
-        return "";
+    public String getName() {
+        return name;
+
     }
 
     @Override
-    double getPrice(String size) {
+    public double getPrice(String size) {
+
         return 0;
     }
 
     @Override
-    String getDetails() {
+    public String getDetails() {
         return " ";
     }
 }
