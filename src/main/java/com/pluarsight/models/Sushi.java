@@ -5,16 +5,18 @@ import java.util.ArrayList;
 public class Sushi implements IOrderItem{
     private String size;
     private String wrapType;
-    private ArrayList<Topping> topping;
+    private ArrayList<Topping> toppings;
     private boolean isFried;
 
     public Sushi(String wrapType, String size, boolean isFried) {
         this.wrapType = wrapType;
         this.size = size;
         this.isFried = isFried;
-        this.topping = new ArrayList<>();
+        this.toppings = new ArrayList<>();
     }
-    public void addTopping(){
+    public void addTopping(Topping topping1){
+        toppings.add(topping1);
+
 
     }
 
@@ -30,9 +32,6 @@ public class Sushi implements IOrderItem{
         return isFried;
     }
 
-    public Sushi() {
-        super();
-    }
 
     @Override
     public String getDetails() {
@@ -40,8 +39,23 @@ public class Sushi implements IOrderItem{
     }
 
     @Override
-    public double getPrice(String size) {
-        return 0;
+    public double getPrice() {
+        double price = 0.0;
+        if(size.equalsIgnoreCase("small")){
+            price = 3.5;
+
+
+        }
+        if(size.equalsIgnoreCase("medium")){
+            price = 6.00;
+        }
+        if (size.equalsIgnoreCase("large")){
+            price = 9.00;
+        }
+        for(Topping topping: toppings){
+            price+= topping.getPrice(size);
+        }
+        return price;
     }
 
 
