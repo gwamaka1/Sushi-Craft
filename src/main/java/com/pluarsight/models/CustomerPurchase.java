@@ -23,12 +23,12 @@ public class CustomerPurchase {
 
     }
     public String getDetails(){
-        String big = "";
+        String customerDetails = "";
         for(IOrderItem item: orderItems){
-            big+= item.getDetails()+ "\n";
+            customerDetails+= item.getDetails()+ "\n";
         }
 
-        return big;
+        return customerDetails;
 
     }
     public boolean isValidOrder(){
