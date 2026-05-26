@@ -12,16 +12,35 @@ public class Fish extends PremiumToppings{
 
     @Override
     public String getDetails() {
-        return super.getDetails();
+        return "Fish: "+ name;
     }
 
     @Override
     public double getPrice(String size) {
-        return super.getPrice(size);
+        double price = 0;
+        if(size.equalsIgnoreCase("small")){
+            price = .75;
+            if(isExtra){
+                price+= .3;
+            }
+        }
+        else if(size.equalsIgnoreCase("medium")){
+            price=1.50;
+            if(isExtra){
+                price+=.6;
+            }
+        }
+        else if(size.equalsIgnoreCase("large")){
+            price =2.25;
+            if (isExtra){
+                price+=.9;
+            }
+        }
+        return price;
     }
 
     @Override
     public String getName() {
-        return super.getName();
+        return name;
     }
 }

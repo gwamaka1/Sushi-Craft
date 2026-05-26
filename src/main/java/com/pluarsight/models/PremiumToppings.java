@@ -18,8 +18,8 @@ public abstract class PremiumToppings extends Topping {
     }
 
     @Override
-    public double getPrice(String size) {
-        return 0;
+    public double getPrice(String size){
+        return 0.0;
     }
 
     @Override
