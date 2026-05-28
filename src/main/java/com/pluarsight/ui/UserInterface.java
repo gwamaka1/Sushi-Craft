@@ -1,6 +1,7 @@
 package com.pluarsight.ui;
 
 import com.pluarsight.models.*;
+import com.pluarsight.receipts.SaveReceipt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,10 +40,10 @@ public class UserInterface {
                 case "3":
                     purchase.addItem(springRollBuilder());
                 case "4":
-                    veiwCart();
+                    veiwCart(purchase);
                     break;
                 case "5":
-                    checkOut();
+                    checkOut(purchase);
                     break;
                 case "0":
                     quit = true;
@@ -165,7 +166,7 @@ public class UserInterface {
         toppingCategories.put("3", "Meats");
         toppingCategories.put("4", "Fish");
         toppingCategories.put("5", "Complementary Side");
-        toppingCategories.put("0", "None");
+        toppingCategories.put("0", "Next");
         // fish category
         HashMap<String, String> fishOptions = new HashMap<>();
 
@@ -277,6 +278,7 @@ public class UserInterface {
 
 
         }
+        System.out.println("added to order");
         return sushi;
 
     }
@@ -353,6 +355,7 @@ public class UserInterface {
         typeOfSpringRoll.put("1", "Veggie");
         typeOfSpringRoll.put("2", "Chicken");
         boolean isValid = false;
+
         while (!isValid) {
             System.out.println("What type of Spring roll do you want? or enter 0 to exit");
             typeOfSpringRoll.entrySet().stream().forEach(stringStringEntry -> System.out.println("(" + stringStringEntry.getKey()+ ") " + stringStringEntry.getValue()));
@@ -360,6 +363,7 @@ public class UserInterface {
             if (typeOfSpringRoll.containsKey(choice)) {
                 type = typeOfSpringRoll.get(choice);
                 isValid = true;
+
 
             } else if (choice.equalsIgnoreCase("0")) {
                 return null;
@@ -369,15 +373,32 @@ public class UserInterface {
 
 
         }
-        return new SpringRoll(type);
+        SpringRoll springRoll = new SpringRoll(type);
+        return springRoll;
     }
 
 
-    private void veiwCart() {
+    private void veiwCart(CustomerPurchase purchase) {
+        if(!purchase.isValidOrder()){
+            System.out.println("this order is empty");
+            return;
+        }
+        System.out.println("========== CART ==========");
+        System.out.println(purchase.getDetails());
+
+        System.out.printf("Total: $%.2f%n", purchase.getTotal());
+        System.out.println("==========================");
 
     }
 
-    private void checkOut() {
+    private void checkOut(CustomerPurchase purchase) {
+        if (!purchase.isValidOrder()) {
+            System.out.println("Cant checkout because order is empty");
+        } else {
+            SaveReceipt saveReceipt = new SaveReceipt();
+            saveReceipt.save(purchase);
+            System.out.println("your purchase has been checked out");
 
+        }
     }
 }
