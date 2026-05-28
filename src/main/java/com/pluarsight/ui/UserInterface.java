@@ -37,7 +37,7 @@ public class UserInterface {
                     purchase.addItem(buildDrink());
                     break;
                 case "3":
-                    addSideToCart();
+                    purchase.addItem(springRollBuilder());
                 case "4":
                     veiwCart();
                     break;
@@ -346,9 +346,32 @@ public class UserInterface {
 
     }
 
-    private void addSideToCart() {
+    private SpringRoll springRollBuilder() {
+        String choice = " ";
+        String type = " ";
+        HashMap<String, String> typeOfSpringRoll = new HashMap<>();
+        typeOfSpringRoll.put("1", "Veggie");
+        typeOfSpringRoll.put("2", "Chicken");
+        boolean isValid = false;
+        while (!isValid) {
+            System.out.println("What type of Spring roll do you want? or enter 0 to exit");
+            typeOfSpringRoll.entrySet().stream().forEach(stringStringEntry -> System.out.println("(" + stringStringEntry.getKey()+ ") " + stringStringEntry.getValue()));
+            choice = scanner.nextLine();
+            if (typeOfSpringRoll.containsKey(choice)) {
+                type = typeOfSpringRoll.get(choice);
+                isValid = true;
 
+            } else if (choice.equalsIgnoreCase("0")) {
+                return null;
+            } else {
+                System.out.println("Invalid input, try again");
+            }
+
+
+        }
+        return new SpringRoll(type);
     }
+
 
     private void veiwCart() {
 
