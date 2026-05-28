@@ -12,7 +12,11 @@ public class Meats extends PremiumToppings {
 
     @Override
     public String getDetails() {
-        return "Meats: " + name;
+        if (isExtra) {
+            return "Meats: Extra " + name;
+        } else {
+            return "Meats: " + name;
+        }
     }
 
     @Override
