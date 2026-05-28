@@ -1,5 +1,8 @@
 package com.pluarsight.ui;
 
+import com.pluarsight.models.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -10,6 +13,7 @@ public class UserInterface {
     }
     public void display(){
         boolean quit = false;
+        CustomerPurchase purchase = new CustomerPurchase();
         while (!quit){
             System.out.println("WELCOME TO SUSHI CRAFT");
             System.out.println("-----------------------");
@@ -24,7 +28,7 @@ public class UserInterface {
             String choice = scanner.nextLine();
             switch (choice){
                 case "1":
-                    addShushiToCart();
+                    purchase.addItem(buildSushi());;
                     break;
                 case "2":
                     addDrinktoCart();
@@ -54,13 +58,9 @@ public class UserInterface {
 
 
     }
-    private void addShushiToCart(){
-        /*
-        -white rice
--brown rice
--seaweed wrap
--soy paper roll
-         */
+    private Sushi buildSushi() {
+        String wrap = "";
+        String size = "";
         System.out.println("What Type of Sushi do you want?");
         System.out.println("(1) white rice");
         System.out.println("(2) brown rice");
@@ -68,15 +68,14 @@ public class UserInterface {
         System.out.println("(4) soy paper roll");
 
         System.out.println("Pick your choice");
-        String wrap;
         String choice;
-        choice= scanner.nextLine();
+        choice = scanner.nextLine();
         boolean isValid = false;
-        while(!isValid) {
+        while (!isValid) {
             switch (choice) {
                 case "1":
                     wrap = "White Rice";
-                    isValid =true;
+                    isValid = true;
                     break;
                 case "2":
                     wrap = "Brown Rice";
@@ -84,15 +83,17 @@ public class UserInterface {
                     break;
                 case "3":
                     wrap = "seaweed wrap";
-                    isValid =true;
+                    isValid = true;
                     break;
                 case "4":
                     wrap = "Soy Paper Roll";
-                    isValid =true;
+                    isValid = true;
 
                     break;
                 default:
                     System.out.println("not a valid choice,try again");
+                    choice = scanner.nextLine();
+                    break;
             }
         }
         System.out.println("Whats the size do you want?\n" +
@@ -100,28 +101,27 @@ public class UserInterface {
                 "(2)6 rolls\n" +
                 "(3)8 rolls\n");
         System.out.println("ENTER CHOICE HERE:");
-        choice= scanner.nextLine();
-        String size;
+        choice = scanner.nextLine();
+        isValid = false;
 
-        while(!isValid) {
+        while (!isValid) {
             switch (choice) {
-                case"1":
-                    size ="small";
+                case "1":
+                    size = "small";
                     isValid = true;
                     break;
-                case"2":
-                    size ="medium";
+                case "2":
+                    size = "medium";
                     isValid = true;
                     break;
-                case"3":
+                case "3":
                     size = "large";
                     isValid = true;
                     break;
                 default:
                     System.out.println("not a valid answer try again");
-
-
-
+                    choice = scanner.nextLine();
+                    break;
 
 
             }
@@ -130,28 +130,31 @@ public class UserInterface {
                 "(1) yes\n" +
                 "(2) no");
         choice = scanner.nextLine();
-        boolean isFried;
-       while(!isValid) {
-           if (choice.equalsIgnoreCase("1")) {
-               isFried = true;
-               isValid =true;
-           } else if (choice.equalsIgnoreCase("2")) {
-               isFried = false;
-               isValid =true;
-           } else {
-               System.out.println("invalid choice try again");
+        boolean isFried = false;
+        isValid = false;
+        while (!isValid) {
+            if (choice.equalsIgnoreCase("1")) {
+                isFried = true;
+                isValid = true;
+            } else if (choice.equalsIgnoreCase("2")) {
+                isFried = false;
+                isValid = true;
+            } else {
+                System.out.println("invalid choice try again");
+                choice = scanner.nextLine();
+                break;
 
-           }
-       }
-       //topping category
-       HashMap<String,String> toppingCategories = new HashMap<>();
-       toppingCategories.put("1","regular toppings");
-       toppingCategories.put("2", "Condiments");
-       toppingCategories.put("3", "Meats");
-       toppingCategories.put("4", "Fish");
-       toppingCategories.put("5", "Complementary Side");
-       toppingCategories.put("0", "None");
-       // fish category
+            }
+        }
+        //topping category
+        HashMap<String, String> toppingCategories = new HashMap<>();
+        toppingCategories.put("1", "regular toppings");
+        toppingCategories.put("2", "Condiments");
+        toppingCategories.put("3", "Meats");
+        toppingCategories.put("4", "Fish");
+        toppingCategories.put("5", "Complementary Side");
+        toppingCategories.put("0", "None");
+        // fish category
         HashMap<String, String> fishOptions = new HashMap<>();
 
         fishOptions.put("1", "Salmon");
@@ -190,23 +193,81 @@ public class UserInterface {
         HashMap<String, String> complementarySides = new HashMap<>();
         complementarySides.put("1", "Wasabi");
         complementarySides.put("2", "Gari");
+        //connecting menu to category
+        HashMap<String, HashMap<String, String>> categoryMenus = new HashMap<>();
+        categoryMenus.put("1", regularToppings);
+        categoryMenus.put("2", condimentOptions);
+        categoryMenus.put("3", meatOptions);
+        categoryMenus.put("4", fishOptions);
+        categoryMenus.put("5", complementarySides);
+        boolean quit = false;
+        Sushi sushi = new Sushi(wrap, size, isFried);
+        while (!quit) {
+            System.out.println("What toppings would you like?");
+            toppingCategories.entrySet().stream().forEach(entry -> System.out.println("(" + entry.getKey() + ") " + entry.getValue()));
+            choice = scanner.nextLine();
+            if (choice.equalsIgnoreCase("0")) {
+                quit = true;
+            } else if (toppingCategories.containsKey(choice)) {
+                System.out.println("What would you like from " + toppingCategories.get(choice));
+                HashMap<String, String> selectedMenu = categoryMenus.get(choice);
 
-       boolean quit = false;
-       while(!quit){
-        System.out.println("What toppings would you like?");
-        toppingCategories.entrySet().stream().forEach(entry -> System.out.println("("+entry.getKey()+") "+ entry.getValue()));
-        choice = scanner.nextLine();
-        if(choice.equalsIgnoreCase("0")){
-            quit = true;
+                selectedMenu.entrySet()
+                        .stream()
+                        .forEach(entry -> System.out.println("(" + entry.getKey() + ") " + entry.getValue()));
+
+                System.out.println("Pick a topping:");
+                String toppingChoice = scanner.nextLine();
+
+                if (selectedMenu.containsKey(toppingChoice)) {
+                    String toppingName = selectedMenu.get(toppingChoice);
+
+                    switch (choice) {
+                        case "1":
+                            sushi.addTopping(new RegToppings(toppingName));
+                            break;
+
+                        case "2":
+                            sushi.addTopping(new Condiments(toppingName));
+                            break;
+
+                        case "3":
+                            System.out.println("Do you want extra " + toppingName + "? y/n");
+                            String extraMeatChoice = scanner.nextLine();
+                            boolean extraMeat = extraMeatChoice.equalsIgnoreCase("y");
+
+                            sushi.addTopping(new Meats(toppingName, extraMeat));
+                            break;
+
+                        case "4":
+                            System.out.println("Do you want extra " + toppingName + "? y/n");
+                            String extraFishChoice = scanner.nextLine();
+                            boolean extraFish = extraFishChoice.equalsIgnoreCase("y");
+
+                            sushi.addTopping(new Fish(toppingName, extraFish));
+                            break;
+
+                        case "5":
+                            sushi.addTopping(new Side(toppingName));
+                            break;
+
+                        default:
+                            System.out.println("Invalid category.");
+                            break;
+                    }
+
+                    System.out.println(toppingName + " added.");
+                } else {
+                    System.out.println("Invalid topping choice.");
+                }
+
+            }
+
+
         }
-        else if(toppingCategories.containsKey(choice)){
+        return sushi;
 
-        }
-
-
-
-
-    }}
+    }
     private void addDrinktoCart(){
 
     }
