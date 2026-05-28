@@ -8,13 +8,15 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner;
-    public UserInterface(){
+
+    public UserInterface() {
         scanner = new Scanner(System.in);
     }
-    public void display(){
+
+    public void display() {
         boolean quit = false;
         CustomerPurchase purchase = new CustomerPurchase();
-        while (!quit){
+        while (!quit) {
             System.out.println("WELCOME TO SUSHI CRAFT");
             System.out.println("-----------------------");
             System.out.println("(1)ADD SUSHI");
@@ -26,12 +28,13 @@ public class UserInterface {
 
             System.out.println("ENTER YOUR CHOICE:");
             String choice = scanner.nextLine();
-            switch (choice){
+            switch (choice) {
                 case "1":
-                    purchase.addItem(buildSushi());;
+                    purchase.addItem(buildSushi());
+                    ;
                     break;
                 case "2":
-                    addDrinktoCart();
+                    purchase.addItem(buildDrink());
                     break;
                 case "3":
                     addSideToCart();
@@ -51,13 +54,11 @@ public class UserInterface {
             }
 
 
-
-
-
         }
 
 
     }
+
     private Sushi buildSushi() {
         String wrap = "";
         String size = "";
@@ -66,6 +67,7 @@ public class UserInterface {
         System.out.println("(2) brown rice");
         System.out.println("(3) seaweed wrap");
         System.out.println("(4) soy paper roll");
+        System.out.println("(0) to exit");
 
         System.out.println("Pick your choice");
         String choice;
@@ -73,6 +75,9 @@ public class UserInterface {
         boolean isValid = false;
         while (!isValid) {
             switch (choice) {
+                case"0":
+                    return null;
+
                 case "1":
                     wrap = "White Rice";
                     isValid = true;
@@ -99,13 +104,16 @@ public class UserInterface {
         System.out.println("Whats the size do you want?\n" +
                 "(1)4 rolls\n" +
                 "(2)6 rolls\n" +
-                "(3)8 rolls\n");
+                "(3)8 rolls\n" +
+                "(0) Exit");
         System.out.println("ENTER CHOICE HERE:");
         choice = scanner.nextLine();
         isValid = false;
 
         while (!isValid) {
             switch (choice) {
+                case"0":
+                    return null;
                 case "1":
                     size = "small";
                     isValid = true;
@@ -128,7 +136,8 @@ public class UserInterface {
         }
         System.out.println("Do you want sushi fried?\n" +
                 "(1) yes\n" +
-                "(2) no");
+                "(2) no\n" +
+                "(0) exit");
         choice = scanner.nextLine();
         boolean isFried = false;
         isValid = false;
@@ -139,7 +148,10 @@ public class UserInterface {
             } else if (choice.equalsIgnoreCase("2")) {
                 isFried = false;
                 isValid = true;
-            } else {
+            } else if(choice.equalsIgnoreCase("0")){
+                return null;
+            }
+            else {
                 System.out.println("invalid choice try again");
                 choice = scanner.nextLine();
                 break;
@@ -268,16 +280,81 @@ public class UserInterface {
         return sushi;
 
     }
-    private void addDrinktoCart(){
+
+    private Drink buildDrink() {
+        String size = "";
+        String drink = " ";
+        String choice = "";
+
+        //Drink options
+        HashMap<String, String> drinkOptions = new HashMap<>();
+        drinkOptions.put("1", "Water");
+        drinkOptions.put("2", "Sprite");
+        drinkOptions.put("3", "Coke");
+        drinkOptions.put("4", "Fanta");
+        drinkOptions.put("5", "Lemonade");
+        boolean isValid = false;
+        while (!isValid) {
+            drinkOptions.entrySet().stream().forEach(entry -> System.out.println("(" + entry.getKey() + ") " + entry.getValue()));
+            System.out.println("Pick your drink or enter 0 to exit");
+            choice = scanner.nextLine();
+            if (drinkOptions.containsKey(choice)) {
+                drink = drinkOptions.get(choice);
+                isValid = true;
+            } else if (choice.equalsIgnoreCase("0")) {
+                return null;
+            } else{
+                System.out.println("Invalid input, try again");
+
+        }
+    }
+
+        isValid = false;
+        System.out.println("Whats the size do you want?\n" +
+                "(1)small\n" +
+                "(2)medium\n" +
+                "(3)large\n" +
+                "(0)Exit");
+        System.out.println("ENTER CHOICE HERE:");
+        choice = scanner.nextLine();
+        while (!isValid) {
+            switch (choice) {
+                case"0":
+                    return null;
+                case "1":
+                    size = "small";
+                    isValid = true;
+                    break;
+                case "2":
+                    size = "medium";
+                    isValid = true;
+                    break;
+                case "3":
+                    size = "large";
+                    isValid = true;
+                    break;
+                default:
+                    System.out.println("not a valid answer try again");
+                    choice = scanner.nextLine();
+                    break;
+
+
+            }
+        }
+        return new Drink(size, drink);
+
 
     }
-    private void addSideToCart(){
+
+    private void addSideToCart() {
 
     }
-    private void veiwCart(){
+
+    private void veiwCart() {
 
     }
-    private void checkOut(){
+
+    private void checkOut() {
 
     }
 }
