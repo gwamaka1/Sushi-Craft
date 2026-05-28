@@ -9,11 +9,13 @@ public class CustomerPurchase {
         this.orderItems = new ArrayList<>();
     }
     public void addItem(IOrderItem item){
-        orderItems.add(item);
+        if (item != null) {
+            orderItems.add(item);
+        }
 
     }
     public double getTotal(){
-        double total= 0;
+        double total= 0.00;
         for(IOrderItem item: orderItems){
             total+= item.getPrice();
         }
@@ -35,14 +37,6 @@ public class CustomerPurchase {
         return !orderItems.isEmpty();
 
     }
-    public ArrayList<IOrderItem> getNewestItemsFirst(){
-        ArrayList<IOrderItem> newestFirst = new ArrayList<>();
-        for(int i = orderItems.size()-1; i>=0; i--){
-            newestFirst.add(orderItems.get(i));
-        }
-        return newestFirst;
 
-
-    }
 }
 
