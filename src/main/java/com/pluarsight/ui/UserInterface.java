@@ -1,5 +1,6 @@
 package com.pluarsight.ui;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -23,7 +24,7 @@ public class UserInterface {
             String choice = scanner.nextLine();
             switch (choice){
                 case "1":
-                    addShushitoCart();
+                    addShushiToCart();
                     break;
                 case "2":
                     addDrinktoCart();
@@ -53,7 +54,7 @@ public class UserInterface {
 
 
     }
-    private void addShushitoCart(){
+    private void addShushiToCart(){
         /*
         -white rice
 -brown rice
@@ -125,10 +126,87 @@ public class UserInterface {
 
             }
         }
+        System.out.println("Do you want sushi fried?\n" +
+                "(1) yes\n" +
+                "(2) no");
+        choice = scanner.nextLine();
+        boolean isFried;
+       while(!isValid) {
+           if (choice.equalsIgnoreCase("1")) {
+               isFried = true;
+               isValid =true;
+           } else if (choice.equalsIgnoreCase("2")) {
+               isFried = false;
+               isValid =true;
+           } else {
+               System.out.println("invalid choice try again");
+
+           }
+       }
+       //topping category
+       HashMap<String,String> toppingCategories = new HashMap<>();
+       toppingCategories.put("1","regular toppings");
+       toppingCategories.put("2", "Condiments");
+       toppingCategories.put("3", "Meats");
+       toppingCategories.put("4", "Fish");
+       toppingCategories.put("5", "Complementary Side");
+       toppingCategories.put("0", "None");
+       // fish category
+        HashMap<String, String> fishOptions = new HashMap<>();
+
+        fishOptions.put("1", "Salmon");
+        fishOptions.put("2", "Eel");
+        fishOptions.put("3", "Shrimp");
+        fishOptions.put("4", "Tuna");
+        fishOptions.put("5", "Spicy Tuna");
+        fishOptions.put("6", "Squid");
+        //Meat category
+
+        HashMap<String, String> meatOptions = new HashMap<>();
+        meatOptions.put("1", "Beef");
+        meatOptions.put("2", "Pork");
+        meatOptions.put("3", "Duck");
+        meatOptions.put("4", "Chicken");
+        //Condiments category
+        HashMap<String, String> condimentOptions = new HashMap<>();
+        condimentOptions.put("1", "Soy Sauce");
+        condimentOptions.put("2", "Spicy Mayo");
+        condimentOptions.put("3", "Eel Sauce");
+        condimentOptions.put("4", "Yum Yum Sauce");
+        condimentOptions.put("5", "Teriyaki");
+        condimentOptions.put("6", "Ponzu Sauce");
+        //Regular Topping category
+        HashMap<String, String> regularToppings = new HashMap<>();
+
+        regularToppings.put("1", "Cucumber");
+        regularToppings.put("2", "Avocado");
+        regularToppings.put("3", "Carrots");
+        regularToppings.put("4", "Lettuce");
+        regularToppings.put("5", "Jalapeños");
+        regularToppings.put("6", "Green onions");
+        regularToppings.put("7", "Red cabbage");
+        regularToppings.put("8", "Pickled ginger");
+        //complementary side
+        HashMap<String, String> complementarySides = new HashMap<>();
+        complementarySides.put("1", "Wasabi");
+        complementarySides.put("2", "Gari");
+
+       boolean quit = false;
+       while(!quit){
+        System.out.println("What toppings would you like?");
+        toppingCategories.entrySet().stream().forEach(entry -> System.out.println("("+entry.getKey()+") "+ entry.getValue()));
+        choice = scanner.nextLine();
+        if(choice.equalsIgnoreCase("0")){
+            quit = true;
+        }
+        else if(toppingCategories.containsKey(choice)){
+
+        }
 
 
 
-    }
+
+    }}
     private void addDrinktoCart(){
 
     }
