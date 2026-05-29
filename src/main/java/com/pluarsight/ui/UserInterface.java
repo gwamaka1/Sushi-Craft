@@ -9,25 +9,52 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner;
+    private static final String RESET  = "\033[0m";
+    private static final String RED    = "\033[31m";
+    private static final String YELLOW = "\033[33m";
+    private static final String CYAN   = "\033[36m";
+    private static final String WHITE  = "\033[97m";
+    private static final String BOLD   = "\033[1m";
+    private static final String DIM    = "\033[2m";
 
     public UserInterface() {
         scanner = new Scanner(System.in);
+
     }
 
     public void display() {
         boolean quit = false;
         CustomerPurchase purchase = new CustomerPurchase();
         while (!quit) {
-            System.out.println("WELCOME TO SUSHI CRAFT");
-            System.out.println("-----------------------");
-            System.out.println("(1)ADD SUSHI");
-            System.out.println("(2)ADD DRINK");
-            System.out.println("(3)ADD SIDE(SPRING ROLL");
-            System.out.println("(4)VIEW ORDER");
-            System.out.println("(5)CHECKOUT");
-            System.out.println("(0)EXIT");
+            System.out.print("\033[H\033[2J"); // clear screen
+            System.out.flush();
 
-            System.out.println("ENTER YOUR CHOICE:");
+            System.out.println(CYAN  + "  ╔═══════════════════════════════════════════╗" + RESET);
+            System.out.println(CYAN  + "  ║                                           ║" + RESET);
+            System.out.println(BOLD  + WHITE + "  ║   ███████╗██╗   ██╗███████╗██╗  ██╗██╗    ║" + RESET);
+            System.out.println(BOLD  + WHITE + "  ║   ██╔════╝██║   ██║██╔════╝██║  ██║██║    ║" + RESET);
+            System.out.println(BOLD  + WHITE + "  ║   ███████╗██║   ██║███████╗███████║██║    ║" + RESET);
+            System.out.println(BOLD  + WHITE + "  ║   ╚════██║██║   ██║╚════██║██╔══██║██║    ║" + RESET);
+            System.out.println(BOLD  + WHITE + "  ║   ███████║╚██████╔╝███████║██║  ██║██║    ║" + RESET);
+            System.out.println(BOLD  + WHITE + "  ║   ╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝    ║" + RESET);
+            System.out.println(YELLOW + "  ║               ✦ C R A F T ✦              ║" + RESET);
+            System.out.println(CYAN  + "  ║                                           ║" + RESET);
+            System.out.println(CYAN  + "  ╚═══════════════════════════════════════════╝" + RESET);
+            System.out.println();
+            System.out.println(YELLOW + "  🍣  Fresh Rolls • Bold Flavors • Your Way  🍣" + RESET);
+            System.out.println();
+            System.out.println(CYAN  + "  ┌─────────────────────────────────────────┐" + RESET);
+            System.out.println(CYAN  + "  │" + BOLD + WHITE + "            ~ MAIN MENU ~                " + RESET + CYAN + "│" + RESET);
+            System.out.println(CYAN  + "  ├─────────────────────────────────────────┤" + RESET);
+            System.out.println(CYAN  + "  │  " + YELLOW + "[1]" + WHITE + "  🍱  Build Your Sushi Roll        " + CYAN + "│" + RESET);
+            System.out.println(CYAN  + "  │  " + YELLOW + "[2]" + WHITE + "  🥤  Add a Drink                  " + CYAN + "│" + RESET);
+            System.out.println(CYAN  + "  │  " + YELLOW + "[3]" + WHITE + "  🥢  Add a Side  (Spring Roll)    " + CYAN + "│" + RESET);
+            System.out.println(CYAN  + "  │  " + YELLOW + "[4]" + WHITE + "  🛒  View My Order                " + CYAN + "│" + RESET);
+            System.out.println(CYAN  + "  │  " + YELLOW + "[5]" + WHITE + "  💳  Checkout                     " + CYAN + "│" + RESET);
+            System.out.println(CYAN  + "  │  " + RED    + "[0]" + WHITE + "  🚪  Exit                         " + CYAN + "│" + RESET);
+            System.out.println(CYAN  + "  └─────────────────────────────────────────┘" + RESET);
+            System.out.println();
+            System.out.print(YELLOW + "  ➤  Enter your choice: " + RESET);
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
@@ -49,7 +76,8 @@ public class UserInterface {
                     quit = true;
                     break;
                 default:
-                    System.out.println("You need to pick an option, try again");
+                    System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
 
 
             }
@@ -97,7 +125,8 @@ public class UserInterface {
 
                     break;
                 default:
-                    System.out.println("not a valid choice,try again");
+                    System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
                     choice = scanner.nextLine();
                     break;
             }
@@ -128,7 +157,8 @@ public class UserInterface {
                     isValid = true;
                     break;
                 default:
-                    System.out.println("not a valid answer try again");
+                    System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
                     choice = scanner.nextLine();
                     break;
 
@@ -153,7 +183,8 @@ public class UserInterface {
                 return null;
             }
             else {
-                System.out.println("invalid choice try again");
+                System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
                 choice = scanner.nextLine();
                 break;
 
@@ -265,20 +296,22 @@ public class UserInterface {
                             break;
 
                         default:
-                            System.out.println("Invalid category.");
+                            System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
                             break;
                     }
 
                     System.out.println(toppingName + " added.");
                 } else {
-                    System.out.println("Invalid topping choice.");
+                    System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
                 }
 
             }
 
 
         }
-        System.out.println("added to order");
+        System.out.println(YELLOW + "  ✔  Added to your order!" + RESET);
         return sushi;
 
     }
@@ -306,9 +339,10 @@ public class UserInterface {
             } else if (choice.equalsIgnoreCase("0")) {
                 return null;
             } else{
-                System.out.println("Invalid input, try again");
+                System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
 
-        }
+
+            }
     }
 
         isValid = false;
@@ -336,13 +370,15 @@ public class UserInterface {
                     isValid = true;
                     break;
                 default:
-                    System.out.println("not a valid answer try again");
+                    System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
                     choice = scanner.nextLine();
                     break;
 
 
             }
         }
+        System.out.println(YELLOW + "  ✔  Added to your order!" + RESET);
         return new Drink(size, drink);
 
 
@@ -368,11 +404,13 @@ public class UserInterface {
             } else if (choice.equalsIgnoreCase("0")) {
                 return null;
             } else {
-                System.out.println("Invalid input, try again");
+                System.out.println(RED + "  ✘  You need to pick an option, try again" + RESET);
+
             }
 
 
         }
+        System.out.println(YELLOW + "  ✔  Added to your order!" + RESET);
         SpringRoll springRoll = new SpringRoll(type);
         return springRoll;
     }
@@ -393,11 +431,11 @@ public class UserInterface {
 
     private void checkOut(CustomerPurchase purchase) {
         if (!purchase.isValidOrder()) {
-            System.out.println("Cant checkout because order is empty");
+            System.out.println(RED + "  ✘  Your order is empty." + RESET);
         } else {
             SaveReceipt saveReceipt = new SaveReceipt();
             saveReceipt.save(purchase);
-            System.out.println("your purchase has been checked out");
+            System.out.println(YELLOW + "  ✔  Order checked out! Receipt saved." + RESET);
 
         }
     }
